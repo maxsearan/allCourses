@@ -375,11 +375,13 @@ public class nestedloops {
             e.printStackTrace();
         }
         //loop read from file and loop display
-        
+        int i = 0;
         try {
             Scanner myfiletoread = new Scanner(myfile);
             while (myfiletoread.hasNext()) {
-                System.out.println(myfiletoread.next());
+                name[i]=myfiletoread.next();
+                System.out.println(name[i]);
+                i++;
             }
             myfiletoread.close();
         } catch (Exception e) {
