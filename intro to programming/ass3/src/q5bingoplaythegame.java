@@ -2,7 +2,7 @@
 import java.util.*;
 import java.io.*;
 
-public class q5playthegame {
+public class q5bingoplaythegame {
 
     public static void main(String[] args) {
 

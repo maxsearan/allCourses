@@ -109,7 +109,7 @@ public class nestedloops {
             System.out.println(" ");
         }
         System.out.println(" ");
-        
+
         //Training 2 dimensional arrays
         System.out.println("Ask for input size for 2 dim array");
         int x, y;
@@ -161,7 +161,10 @@ public class nestedloops {
         WriteToFile();
         System.out.println("IO reading from file class exmple\n");
         readFromFile();
-
+        System.out.println("Simple Read and Write to a file simplereadandwrite.txt");
+        simplewriteandread();
+        System.out.println("Loop write and read from a file");
+        loopreadandwrite();
     }
 
     public static int rowsArray(int[][] array) {
@@ -328,6 +331,60 @@ public class nestedloops {
             e.printStackTrace();
         }
 
+    }
+
+    public static void simplewriteandread() {
+        //instantiates class File with object simplereadandwrite 
+        //with File constructor?
+        //and creates simreadandwrite.txt file
+        File simplereadandwrite = new File("simplereadandwrite.txt");
+        //Write Gia to simreadandwrite.txt
+        try {
+            PrintWriter myfileoutput = new PrintWriter(simplereadandwrite);
+            myfileoutput.println("Gia");
+            myfileoutput.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Read entry "Gia" from simreadandwrite.txt file and displays 
+        try {
+            Scanner myfileinput = new Scanner(simplereadandwrite);
+            System.out.println(myfileinput.next());
+            myfileinput.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loopreadandwrite() {
+        File myfile = new File("myfile.txt");
+        //loop write to file string array
+        String [] name = new String[20];
+        
+        for(int i=0;i<20;i++){
+            name[i]= Integer.toString(i);
+        }
+        try {
+            PrintWriter myfiletoprint = new PrintWriter(myfile);
+            for (int i = 0; i < 10; i++) {
+                myfiletoprint.println(name[i]);
+            }
+            myfiletoprint.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //loop read from file and loop display
+        
+        try {
+            Scanner myfiletoread = new Scanner(myfile);
+            while (myfiletoread.hasNext()) {
+                System.out.println(myfiletoread.next());
+            }
+            myfiletoread.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
