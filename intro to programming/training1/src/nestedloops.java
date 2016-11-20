@@ -363,12 +363,13 @@ public class nestedloops {
         String [] name = new String[20];
         
         for(int i=0;i<20;i++){
-            name[i]= Integer.toString(i);
+            name[i]= Integer.toString(i+(int)(Math.random()*10+1));
         }
         try {
             PrintWriter myfiletoprint = new PrintWriter(myfile);
             for (int i = 0; i < 10; i++) {
                 myfiletoprint.println(name[i]);
+                
             }
             myfiletoprint.close();
         } catch (Exception e) {
