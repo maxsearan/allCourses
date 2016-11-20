@@ -369,7 +369,6 @@ public class nestedloops {
             PrintWriter myfiletoprint = new PrintWriter(myfile);
             for (int i = 0; i < 10; i++) {
                 myfiletoprint.println(name[i]);
-                
             }
             myfiletoprint.close();
         } catch (Exception e) {
