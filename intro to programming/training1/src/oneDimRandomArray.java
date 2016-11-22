@@ -10,7 +10,7 @@ public class oneDimRandomArray {
         int[] array = new int[10];
         for (int i = 0; i < 10; i++) {
             array[i] = (int) (Math.random() * 20 + 1);
-            System.out.print(" " + array[i] + " " + "\n");
+            System.out.println(" " + array[i] + " " + "\n");
 
         }
         System.out.println();
