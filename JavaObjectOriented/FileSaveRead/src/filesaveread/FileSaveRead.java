@@ -29,9 +29,15 @@ public class FileSaveRead {
     /**
      * @param args the command line arguments
      */
+    static int enterinteger(String )
     public static void main(String[] args) {
         // TODO code application logic here
+        try{
         Scanner input = new Scanner(System.in);
+        System.out.println("enter interger: ");
+        int enter = input.nextInt();
+        }catch(InputMismatch)
+        
         File file = new File("data.tx");
         try {
             PrintWriter printToFile = new PrintWriter(file);
