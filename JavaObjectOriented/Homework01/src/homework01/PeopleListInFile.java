@@ -126,8 +126,7 @@ package homework01;
 
 import java.util.*;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class PeopleListInFile {
 
@@ -179,23 +178,36 @@ Enter age: 22
 Enter city: Montreal
 Person added.*/
         System.out.println("Adding a person.");
+        
         System.out.println("Enter name:");
         String name = input.nextLine();
         input.nextLine();  
+        
+        System.out.println("Enter age:");
+        int age = input.nextInt();
+        input.nextLine();  
+        
+        System.out.println("Enter city:");
+        String city = input.nextLine();
+        input.nextLine();  
+        
         File filelocation = new File("people.txt");
         
         try {
             PrintWriter file = new PrintWriter(filelocation);
             file.println(name);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(PeopleListInFile.class.getName()).log(Level.SEVERE, null, ex);
+            file.println(age);
+            file.println(city);
+            file.println();
+            file.close();
+        } catch (Exception e) {
         }
           
             
         
     }
 
-    ;
+    
     static void listallPersons2() {
 /*Listing all persons
 Jerry is 22 from Montreal
