@@ -127,12 +127,10 @@ package homework01;
 import java.util.*;
 import java.io.*;
 
-
 public class PeopleListInFile {
 
-    static Scanner input = new Scanner(System.in);
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        Scanner input = new Scanner(System.in);
         for (;;) {
             System.out.println("1. Add person info\n"
                     + "2. List persons info\n"
@@ -140,7 +138,7 @@ public class PeopleListInFile {
                     + "4. Find all persons younger than age\n"
                     + "0. Exit");
             int choice = input.nextInt();
-            if((choice>5)||(choice<0)){
+            if ((choice > 5) || (choice < 0)) {
                 System.out.println("Please enter a valid choice.");
                 continue;
             }
@@ -171,66 +169,131 @@ public class PeopleListInFile {
         }
     }
 
-    static void addPerson1() {
-/*Adding a person.
+    static void addPerson1() throws IOException {
+        /*Adding a person.
 Enter name: Jerry
 Enter age: 22
 Enter city: Montreal
 Person added.*/
+        Scanner input = new Scanner(System.in);
         System.out.println("Adding a person.");
-        
         System.out.println("Enter name:");
         String name = input.nextLine();
-        input.nextLine();  
-        
         System.out.println("Enter age:");
-        int age = input.nextInt();
-        input.nextLine();  
         
+        int age = input.nextInt();
+        input.nextLine(); 
         System.out.println("Enter city:");
         String city = input.nextLine();
-        input.nextLine();  
-        
-        File filelocation = new File("people.txt");
-        
+        FileWriter filelocation = new FileWriter("people.txt");
+
         try {
             PrintWriter file = new PrintWriter(filelocation);
+
             file.println(name);
             file.println(age);
             file.println(city);
-            file.println();
             file.close();
-        } catch (Exception e) {
+        } catch (InputMismatchException ime) {
+            System.out.println("Invalid input. Terminating");
         }
-          
-            
-        
+
     }
 
-    
     static void listallPersons2() {
-/*Listing all persons
+        /*Listing all persons
 Jerry is 22 from Montreal
 Maria is 26 from Toronto*/
         System.out.println("Listing all persons");
+        File myFile = new File("people.txt"); // path
+        Scanner input = new Scanner(System.in);
+        String[] entry = new String[3] ;
+        try {
+            Scanner fileinput = new Scanner(myFile); //object 
+
+            while (fileinput.hasNext()) {
+                for (int i=0;i<3;i++){
+                entry[i] = fileinput.nextLine();
+                
+                }
+                System.out.println(entry[0]+" is "+entry[1]+" from "+entry[2]);
+            }
+            System.out.println("\n\n");
+            fileinput.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     static void Enterpartialpersonname3() {
-/*Enter partial person name:
+        /*Enter partial person name:
 ri
 Matches found:
 Maria is 26 from Toronto*/
         System.out.println("Enter partial person name:");
+        
+         
+        Scanner input = new Scanner(System.in);
+        String parName = input.nextLine();
+        File myFile = new File("people.txt"); // path
+        String[] entry = new String[3] ;
+        try {
+            Scanner fileinput = new Scanner(myFile); //object 
+
+            while (fileinput.hasNext()) {
+                for (int i=0;i<3;i++){
+                entry[i] = fileinput.nextLine();
+                
+                }
+                System.out.println(entry[0].matches(".*"+parName+".*"));
+               if (entry[0].matches(".*"+parName+".*")) {
+            //return index of the match;
+                System.out.println(entry[0]+" is "+entry[1]+" from "+entry[2]);
+                }
+            }
+            System.out.println("\n\n");
+            fileinput.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        
 
     }
 
     static void findAllPersonsYoungerThanAge4() {
-/*Enter maximum age:
+        /*Enter maximum age:
 25
 Matches found:
 Jerry is 22 from Montreal*/
+        
         System.out.println("Enter maximum age:");
+        
+         File myFile = new File("people.txt"); // path
+        Scanner input = new Scanner(System.in);
+        int minAge = input.nextInt();
+        String[] entry = new String[3] ;
+        try {
+            Scanner fileinput = new Scanner(myFile); //object 
+
+            while (fileinput.hasNext()) {
+                for (int i=0;i<3;i++){
+                entry[i] = fileinput.nextLine();
+                
+                }
+               if (Integer.valueOf(entry[1])<=minAge){
+                System.out.println(entry[0]+" is "+entry[1]+" from "+entry[2]);
+                }
+            }
+            System.out.println("\n\n");
+            fileinput.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
