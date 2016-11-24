@@ -179,8 +179,20 @@ Person added.*/
         System.out.println("Adding a person.");
         System.out.println("Enter name:");
         String name = input.nextLine();
-        System.out.println("Enter age:");
-        String age = input.nextLine();
+        String age ;
+        for (;;) {
+            try {
+                System.out.println("Enter age:");
+                int ageInt = input.nextInt();
+                age = Integer.toString(ageInt);
+                input.nextLine(); // consume left-over new line character
+                break;
+            } catch (InputMismatchException ime) {
+                input.nextLine(); // consume the invalid input
+                System.out.println("Invalid input, try again");
+            }
+        }
+
         System.out.println("Enter city:");
         String city = input.nextLine();
         try {
