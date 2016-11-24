@@ -1,127 +1,3 @@
-/*
- HOMEWORK - day 2
-
-Create project PeopleListInFile
-
-You will display a menu to the user:
-1. Add person info
-2. List persons info
-3. Find a person by name
-4. Find all persons younger than age
-0. Exit
-
-You will implement functions to manage contents of file "people.txt".
-
-Example session
-
-What do you want to do?
-1. Add person info
-2. List persons info
-3. Find and list a person by name
-4. Find and list persons younger than age
-0. Exit
-Choice: 1
-
-Adding a person.
-Enter name: Jerry
-Enter age: 22
-Enter city: Montreal
-Person added.
-
-What do you want to do?
-1. Add person info
-2. List persons info
-3. Find a person by name
-4. Find all persons younger than age
-0. Exit
-Choice: 1
-
-Adding a person.
-Enter name: Maria
-Enter age: 26
-Enter city: Toronto
-Person added.
-
-What do you want to do?
-1. Add person info
-2. List persons info
-3. Find a person by name
-4. Find all persons younger than age
-0. Exit
-Choice: 2
-
-Listing all persons
-Jerry is 22 from Montreal
-Maria is 26 from Toronto
-
-What do you want to do?
-1. Add person info
-2. List persons info
-3. Find a person by name
-4. Find all persons younger than age
-0. Exit
-Choice: 3
-
-Enter partial person name:
-ri
-Matches found:
-Maria is 26 from Toronto
-
-What do you want to do?
-1. Add person info
-2. List persons info
-3. Find a person by name
-4. Find all persons younger than age
-0. Exit
-Choice: 4
-
-Enter maximum age:
-25
-Matches found:
-Jerry is 22 from Montreal
-
-What do you want to do?
-1. Add person info
-2. List persons info
-3. Find a person by name
-4. Find all persons younger than age
-0. Exit
-Choice: 0
-
-Good bye!
-
-
-
-Result data file will have the following contents.
-Jerry
-22
-Montreal
-Maria
-26
-Toronto
-
-
-NOTE: If you run your program again you will operate
-on data you already have, example:
-
-What do you want to do?
-1. Add person info
-2. List persons info
-3. Find a person by name
-4. Find all persons younger than age
-0. Exit
-Choice: 2
-
-Listing all persons
-Jerry is 22 from Montreal
-Maria is 26 from Toronto
-
-
-NOTE: You do NOT need to and are not allowed to
-store data in memory in array or ArrayList.
-You must read file every time.
-
- */
 package homework01;
 
 import java.util.*;
@@ -137,11 +13,27 @@ public class PeopleListInFile {
                     + "3. Find a person by name\n"
                     + "4. Find all persons younger than age\n"
                     + "0. Exit");
-            int choice = input.nextInt();
+
+            int trychoice = 0;
+            for (;;) {
+                try {
+                    System.out.println("Please enter choice 0;1;2;3;4;5.");
+                    trychoice = input.nextInt();
+                    input.nextLine();
+                    break;
+                } catch (InputMismatchException ime) {
+                    System.out.println("Please enter valid data");
+                    input.nextLine();
+                }
+
+            }
+
+            int choice = trychoice;
             if ((choice > 5) || (choice < 0)) {
-                System.out.println("Please enter a valid choice.");
+                System.out.println("Make choice 0;1;2;3;4;5.");
                 continue;
             }
+
             System.out.println("choice=" + choice);
             switch (choice) {
                 case 1: {
@@ -164,6 +56,10 @@ public class PeopleListInFile {
                     exit();
                     return;
                 }
+                default: {
+                    System.err.println("Fatal error: invalid control flow");
+                    System.exit(1);
+                }
             }
 
         }
@@ -179,19 +75,8 @@ Person added.*/
         System.out.println("Adding a person.");
         System.out.println("Enter name:");
         String name = input.nextLine();
-        String age ;
-        for (;;) {
-            try {
-                System.out.println("Enter age:");
-                int ageInt = input.nextInt();
-                age = Integer.toString(ageInt);
-                input.nextLine(); // consume left-over new line character
-                break;
-            } catch (InputMismatchException ime) {
-                input.nextLine(); // consume the invalid input
-                System.out.println("Invalid input, try again");
-            }
-        }
+        System.out.println("Enter age:");
+        String age = stringAge();
 
         System.out.println("Enter city:");
         String city = input.nextLine();
@@ -293,7 +178,23 @@ Jerry is 22 from Montreal*/
 
         File myFile = new File("people.txt"); // path
         Scanner input = new Scanner(System.in);
-        int minAge = input.nextInt();
+        
+        
+        
+        int trychoice ;
+            for (;;) {
+                try {
+                    trychoice = input.nextInt();
+                    input.nextLine();
+                    break;
+                } catch (InputMismatchException ime) {
+                    System.out.println("Please enter valid age");
+                    input.nextLine();
+                }
+
+            }
+        
+        int minAge = trychoice;
         String[] entry = new String[3];
         try {
             Scanner fileinput = new Scanner(myFile); //object 
@@ -319,5 +220,27 @@ Jerry is 22 from Montreal*/
     static void exit() {
         System.out.println("Good bye!");
 
+    }
+
+    static String stringAge() {
+        Scanner input = new Scanner(System.in);
+
+        String age;
+        int ageInt;
+        for (;;) {
+            try {
+
+                ageInt = input.nextInt();
+                age = Integer.toString(ageInt);
+                input.nextLine(); // consume left-over new line character
+                break;
+
+            } catch (InputMismatchException ime) {
+                input.nextLine(); // consume the invalid input
+                System.out.println("Invalid input, try again");
+            }
+
+        }
+        return age;
     }
 }
