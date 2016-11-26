@@ -1,63 +1,94 @@
-/*
- DAY 04 TASK 3
-
-Create a project AirportTravel.
-
-In the main directory of the project, using Notepad create file "airports.txt" which will contain lines such as:
-
-YUL;Montreal;45.4697842;-73.7554174
-YYZ;Toronto;43.6777215;-79.6270084
-JFK;New York JFK;40.6413151;-73.7803278,17
-
-(Add at least 3 more lines)
-
-Create a class Airport initially like this:
-
-class Airport {
-	String code, city;
-	double latitude, longitude;
-}
-
-Add a suitable constructor, getters and setters that ensure that:
--code is always 3 upper-case letters,
-- city is non-null, not empty string,
-- latitude and longitude are within the correct ranges.
-
-When your program starts you will read file "airports.txt" instantiate object type Airport for each of them and add them to
-
-static ArrayList<Airport> airportList = new ArrayList<>();
-
-Suggestion: read each line with nextLine(), then split(";") the result, parse doubles and pass to Airport() constructor.
-
-Display the following menu to the user:
-
-1. Show all airports (codes and city names)
-2. Find distance between two airports by codes.
-3. Find the 2 airports nearest to an airport given and display the distance.
-4. Add a new airport to the list.
-0. Exit.
-
-On Exit your program must write back an updated list of airports to "airports.txt" file.
-
-Suggestion: make a copy of "airports.txt" file just in case you lost data when overriding.
-
-Implement the functionality listed in the menu.
-
-Regarding item #3 - if you can't find the 2 nearest airports then find the 1 nearest airport and display the distance.
-
-
- */
 package airporttravel;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Airport {
 
-    String code, city;
-    double latitude, longitude;
+    Airport(String code) {
+        setCode(code);
+    }
+
+    Airport(String code, String city) {
+        setCode(code);
+        setCity(city);
+    }
+
+    Airport(String code, String city, double latitude) {
+        setCode(code);
+        setCity(city);
+        setLatitude(latitude);
+    }
+
+    Airport(String code, String city, double latitude, double longitude) {
+        setCode(code);
+        setCity(city);
+        setLatitude(latitude);
+        setLongitude(longitude);
+    }
+
+    private String code;
+    private String city;
+    private double latitude;
+    private double longitude;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+
+        if (code.length() == 3 && code.matches("[A-Z]+")) {
+            this.code = code;
+            return;
+        }
+        throw new IllegalArgumentException("Code must Have 3 upper-case letters");
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        if (city.equals("") || city.isEmpty()) {
+            throw new IllegalArgumentException("City must be non-null and not empty string");
+        }
+        this.city = city;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        if (latitude <= 90 && latitude >= -90) {
+            this.latitude = latitude;
+            return;
+        }
+        throw new IllegalArgumentException("latitude between -90 and 90");
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+
+        if (longitude <= 180 && longitude >= -180) {
+            this.longitude = longitude;
+            return;
+        }
+        throw new IllegalArgumentException("longitude between -180 and 180");
+
+    }
+
 }
 
 /**
@@ -70,77 +101,222 @@ public class AirportTravel {
     static Scanner input = new Scanner(System.in);
     static final String AIRPORT_NAMES = "airports.txt";
 
-
     public static void main(String[] args) {
-
-        System.out.println("1. Show all airports (codes and city names)\n"
-                + "2. Find distance between two airports by codes.\n"
-                + "3. Find the 2 airports nearest to an airport given and display the distance.\n"
-                + "4. Add a new airport to the list.\n"
-                + "0. Exit.");
-
-        System.out.println("Enter your selection:");
-        int choice = input.nextInt();
-
-        switch (choice) {
-            case 1: {
-                showAllAirports1();
-                break;
+        String line;
+        int numerOfAiportsInFile =0;
+        File file = new File(AIRPORT_NAMES);
+        try {
+            Scanner fileToRead = new Scanner(file);
+            while (fileToRead.hasNextLine()) {
+                line = fileToRead.nextLine();
+                String delims = ";";
+                String[] tokens = line.split(delims);
+                String code = tokens[0];
+                String city = tokens[1];
+                double latitude = Double.parseDouble(tokens[2]);
+                double longitude = Double.parseDouble(tokens[3]);
+                Airport airport = new Airport(code, city, latitude, longitude);
+                airportList.add(airport);
+                numerOfAiportsInFile++;
             }
+            fileToRead.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not read.");
+        }
+        for (;;) {
+            System.out.println("\n1. Show all airports (codes and city names)\n"
+                    + "2. Find distance between two airports by codes.\n"
+                    + "3. Find the 2 airports nearest to an airport given and display the distance.\n"
+                    + "4. Add a new airport to the list.\n"
+                    + "0. Exit.");
+            int choice = 0;
+            for (;;) {
+                try {
+                    System.out.println("Please enter choice 0;1;2;3;4");
+                    choice = input.nextInt();
+                    input.nextLine();
+                    break;
+                } catch (InputMismatchException ime) {
+                    System.out.println("Please enter valid data");
+                    input.nextLine();
+                }
+            }
+            switch (choice) {
+                case 1: {
+                    showAllAirports1();
+                    break;
+                }
 
-            case 2: {
-                findDistanceBetweenTwoAirportsByCodes2();
-                break;
-            }
-            case 3: {
-                FindTheTwoairportsNearestToAnAirportGivenAndDisplayTheDistance3();
-                break;
-            }
-            case 4: {
-                addNewAirportToTheList4();
-                break;
-            }
-            case 0: {
-                exit0();
-                break;}
-            default:{
-                
-            }
-            
-            
+                case 2: {
+                    displayDistanceOf2Airports2();
+                    break;
+                }
+                case 3: {
+                    FindTheTwoairportsNearestToAnAirportGivenAndDisplayTheDistance3();
+                    break;
+                }
+                case 4: {
+                    addNewAirportToTheList4();
+                    break;
+                }
+                case 0: {
+                    exit0(numerOfAiportsInFile);
+                    return;
+                }
+                default: {
+                    System.err.println("Fatal error: invalid control flow");
+                    System.exit(1);
+                }
 
+            }
         }
     }
 
-    private static void showAllAirports1()  {
-        try{  
-                         File file = new File(AIRPORT_NAMES);
-                         Scanner fileToScan = new Scanner(file);
-            while(fileToScan.hasNextLine()){
-             
-             System.out.println(fileToScan.nextLine());
-            }
+    private static void showAllAirports1() {
+        //ONE WAY TO DO IT
+        /*for (Airport a : airportList) {
+            System.out.printf("code=%s  city=%s  latitude=%.7f longitude=%.7f %n",
+                    a.getCode(), a.getCity(), a.getLatitude(), a.getLongitude());
+        }*/
+        for (int i = 0; i < airportList.size(); i++) {
+            Airport a = airportList.get(i);
+            System.out.printf("code=%s  city=%s  latitude=%.7f longitude=%.7f %n",
+                    a.getCode(), a.getCity(), a.getLatitude(), a.getLongitude());
+
         }
-        catch( FileNotFoundException e){
-            
-        }
-       
-        
+
     }
 
-    private static void findDistanceBetweenTwoAirportsByCodes2() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private static void displayDistanceOf2Airports2() {
+
+        System.out.println("Calculate the distance Between 2 airports.");
+        System.out.println("Enter the code of the first and second Airport: ");
+        String aCode = input.nextLine();
+        String bCode = input.nextLine();
+
+        System.out.printf("Distance between %.2f miles %n", calculateDistancebetween2Airports(aCode, bCode));
+
+    }
+
+    private static double calculateDistancebetween2Airports(String aCode, String bCode) {
+
+        double lat1 = 0, lat2 = 0, lon1 = 0, lon2 = 0, distance = 0;
+        for (int i = 0; i < airportList.size(); i++) {
+            Airport a = airportList.get(i);
+
+            Airport b = airportList.get(i);
+
+            if (a.getCode().contains(aCode)) {
+                System.out.println(a.getCity());
+                lat1 = a.getLatitude();
+                lon1 = a.getLongitude();
+            }
+            if (b.getCode().contains(bCode)) {
+                System.out.println(b.getCity());
+                lat2 = b.getLatitude();
+                lon2 = b.getLongitude();
+            }
+        }
+        distance = distance(lat1, lon1, lat2, lon2);
+        return distance;
     }
 
     private static void FindTheTwoairportsNearestToAnAirportGivenAndDisplayTheDistance3() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String code, code1 = "", code2 = "";
+        int kMinIndex = 0;
+        Double distance = Double.POSITIVE_INFINITY, minDistance = Double.POSITIVE_INFINITY;
+        Double secondMinDistance = Double.POSITIVE_INFINITY;
+        Airport a, nA1, nA2, temp;
+        System.out.println("Find the 2 nearest airports to a an airport.");
+        System.out.println("Enter the code of your airport:");
+        code = input.nextLine();
+        for (int i = 0; i < airportList.size(); i++) {
+            a = airportList.get(i);
+            if (code.contains(a.getCode())) {
+                for (int j = 0; j < airportList.size(); j++) {
+                    temp = airportList.get(j);
+                    distance = calculateDistancebetween2Airports(a.getCode(), temp.getCode());
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        nA1 = airportList.get(j);
+                        code1 = nA1.getCode();
+                        kMinIndex = j;
+                    }
+                }
+                for (int j = 0; j < airportList.size(); j++) {
+                    temp = airportList.get(j);
+                    distance = calculateDistancebetween2Airports(a.getCode(), temp.getCode());
+                    if ((distance < secondMinDistance) && (kMinIndex != j)) {
+
+                        secondMinDistance = distance;
+                        nA2 = airportList.get(j);
+                        code2 = nA2.getCode();
+                    }
+                }
+            }
+
+        }
+        System.out.printf("The nearest airport from %s is %s at %.1f miles %n", code, code1, minDistance);
+        System.out.printf("The second nearest airport from %s is %s at %.1f miles %n", code, code2, secondMinDistance);
+
     }
 
     private static void addNewAirportToTheList4() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String code, city;
+        float longitude, latitude;
+        System.out.println("Enter code, city, longitude, latitude for a new airport to the list.");
+        code = input.nextLine();
+        city = input.nextLine();
+        longitude = Float.parseFloat(input.nextLine());
+        latitude = Float.parseFloat(input.nextLine());
+
+        Airport a = new Airport(code, city, longitude, latitude);
+        airportList.add(a);
+
     }
 
-    private static void exit0() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private static void exit0(int numerOfAiportsInFile) {
+        //TO DO  WRITE THE ARRAY THE THE FILE AIRPORT.TXT
+        for (int i = numerOfAiportsInFile;i<airportList.size();i++){
+            Airport a = airportList.get(i);
+        try {
+            File file = new File(AIRPORT_NAMES);            
+            //true = append file
+            FileWriter fileWritter = new FileWriter(file.getName(), true);
+            BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+            bufferWritter.write("\n"+a.getCode()+";"+a.getCity()+";"+a.getLatitude()+";"+a.getLongitude());
+            bufferWritter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        }
+        System.out.printf("Number of aiports %d added %n",airportList.size()-numerOfAiportsInFile);
+        
+        System.out.println("the aiport.txt file was updated and bye for now!");
+
+    }
+
+    private static double distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        return (dist);
+    }
+
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+ /*::	This function converts decimal degrees to radians						 :*/
+ /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    private static double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+ /*::	This function converts radians to decimal degrees						 :*/
+ /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    private static double rad2deg(double rad) {
+        return (rad * 180 / Math.PI);
     }
 }
