@@ -103,7 +103,7 @@ public class AirportTravel {
 
     public static void main(String[] args) {
         String line;
-        int numerOfAiportsInFile =0;
+        int numerOfAiportsInFile = 0;
         File file = new File(AIRPORT_NAMES);
         try {
             Scanner fileToRead = new Scanner(file);
@@ -191,8 +191,8 @@ public class AirportTravel {
 
         System.out.println("Calculate the distance Between 2 airports.");
         System.out.println("Enter the code of the first and second Airport: ");
-        String aCode = input.nextLine();
-        String bCode = input.nextLine();
+        String aCode = enterAndValidateAirportCode();
+        String bCode = enterAndValidateAirportCode();
 
         System.out.printf("Distance between %.2f miles %n", calculateDistancebetween2Airports(aCode, bCode));
 
@@ -207,12 +207,10 @@ public class AirportTravel {
             Airport b = airportList.get(i);
 
             if (a.getCode().contains(aCode)) {
-                System.out.println(a.getCity());
                 lat1 = a.getLatitude();
                 lon1 = a.getLongitude();
             }
             if (b.getCode().contains(bCode)) {
-                System.out.println(b.getCity());
                 lat2 = b.getLatitude();
                 lon2 = b.getLongitude();
             }
@@ -236,7 +234,7 @@ public class AirportTravel {
                 for (int j = 0; j < airportList.size(); j++) {
                     temp = airportList.get(j);
                     distance = calculateDistancebetween2Airports(a.getCode(), temp.getCode());
-                    if (distance < minDistance) {
+                    if (distance < minDistance && i != j) {
                         minDistance = distance;
                         nA1 = airportList.get(j);
                         code1 = nA1.getCode();
@@ -246,8 +244,7 @@ public class AirportTravel {
                 for (int j = 0; j < airportList.size(); j++) {
                     temp = airportList.get(j);
                     distance = calculateDistancebetween2Airports(a.getCode(), temp.getCode());
-                    if ((distance < secondMinDistance) && (kMinIndex != j)) {
-
+                    if (distance < secondMinDistance && kMinIndex != j && i != j) {
                         secondMinDistance = distance;
                         nA2 = airportList.get(j);
                         code2 = nA2.getCode();
@@ -277,22 +274,22 @@ public class AirportTravel {
 
     private static void exit0(int numerOfAiportsInFile) {
         //TO DO  WRITE THE ARRAY THE THE FILE AIRPORT.TXT
-        for (int i = numerOfAiportsInFile;i<airportList.size();i++){
+        for (int i = numerOfAiportsInFile; i < airportList.size(); i++) {
             Airport a = airportList.get(i);
-        try {
-            File file = new File(AIRPORT_NAMES);            
-            //true = append file
-            FileWriter fileWritter = new FileWriter(file.getName(), true);
-            BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-            bufferWritter.write("\n"+a.getCode()+";"+a.getCity()+";"+a.getLatitude()+";"+a.getLongitude());
-            bufferWritter.close();
+            try {
+                File file = new File(AIRPORT_NAMES);
+                //true = append file
+                FileWriter fileWritter = new FileWriter(file.getName(), true);
+                BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                bufferWritter.write("\n" + a.getCode() + ";" + a.getCity() + ";" + a.getLatitude() + ";" + a.getLongitude());
+                bufferWritter.close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        }
-        System.out.printf("Number of aiports %d added %n",airportList.size()-numerOfAiportsInFile);
-        
+        System.out.printf("Number of aiports %d added %n", airportList.size() - numerOfAiportsInFile);
+
         System.out.println("the aiport.txt file was updated and bye for now!");
 
     }
@@ -318,5 +315,20 @@ public class AirportTravel {
  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
     private static double rad2deg(double rad) {
         return (rad * 180 / Math.PI);
+    }
+
+    private static String enterAndValidateAirportCode() {
+        String code;
+        code = "";
+        boolean codevalide = false;
+        while (!codevalide) {
+            code=input.nextLine();
+            if (code.length() == 3 && code.matches("[A-Z]+")) {
+                codevalide = true;
+            }
+            System.out.println("Please enter valid code for airport 3 upper-case letters.");
+        }
+        
+        return code;
     }
 }
