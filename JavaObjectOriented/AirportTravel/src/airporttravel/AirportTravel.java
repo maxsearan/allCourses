@@ -227,7 +227,7 @@ public class AirportTravel {
         Airport a, nA1, nA2, temp;
         System.out.println("Find the 2 nearest airports to a an airport.");
         System.out.println("Enter the code of your airport:");
-        code = input.nextLine();
+        code = enterAndValidateAirportCode();
         for (int i = 0; i < airportList.size(); i++) {
             a = airportList.get(i);
             if (code.contains(a.getCode())) {
@@ -262,7 +262,7 @@ public class AirportTravel {
         String code, city;
         float longitude, latitude;
         System.out.println("Enter code, city, longitude, latitude for a new airport to the list.");
-        code = input.nextLine();
+        code = enterAndValidateAirportCode();
         city = input.nextLine();
         longitude = Float.parseFloat(input.nextLine());
         latitude = Float.parseFloat(input.nextLine());
