@@ -276,16 +276,20 @@ public class AirportTravel {
         //TO DO  WRITE THE ARRAY THE THE FILE AIRPORT.TXT
         for (int i = numerOfAiportsInFile; i < airportList.size(); i++) {
             Airport a = airportList.get(i);
+            File file = new File(AIRPORT_NAMES);
             try {
-                File file = new File(AIRPORT_NAMES);
+                
                 //true = append file
                 FileWriter fileWritter = new FileWriter(file.getName(), true);
                 BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                
                 bufferWritter.write("\n" + a.getCode() + ";" + a.getCity() + ";" + a.getLatitude() + ";" + a.getLongitude());
                 bufferWritter.close();
 
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                System.out.println("File not found: "+ file.toString());
+            }catch(IOException e){
+                System.out.println("Unable to read file: " + file.toString());
             }
         }
         System.out.printf("Number of aiports %d added %n", airportList.size() - numerOfAiportsInFile);
