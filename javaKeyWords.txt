@@ -1,0 +1,5 @@
+
+String data[] = fileLine.split(";");
+if (data.length != 4) {
+throw new IllegalArgumentException("Line malformed: " + fileLine);
+}

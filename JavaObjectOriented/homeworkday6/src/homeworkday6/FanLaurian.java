@@ -100,8 +100,7 @@ public class FanLaurian {
             try {
                 Scanner input = new Scanner(System.in);
                 String toggle = input.nextLine();
-                if(toggle=on)
-                fan.setOn(toggle);
+//                fan.setOn(toggle);
                 System.out.println(fan.toString());
                 break;
             } catch (InputMismatchException e) {
