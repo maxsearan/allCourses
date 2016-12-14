@@ -49,11 +49,12 @@ and for other sorts use one Comparator class for each.*/
 abstract class MarineVehicles {
 
     String type;
-static int index;
-int ID;
+    static int index;
+    int ID;
+
     abstract public String typeOfBoat();
+
     abstract public void uniqueIDPrint();
-    
 
 }
 
@@ -71,7 +72,7 @@ class Boat extends MarineVehicles implements Comparable<Boat> {
         this.length = length;
         this.masts = masts;
         super.index++;
-        super.ID=super.index;
+        super.ID = super.index;
 
     }
 
@@ -92,8 +93,8 @@ class Boat extends MarineVehicles implements Comparable<Boat> {
 
     @Override
     public void uniqueIDPrint() {
-            System.out.println(super.ID);
-        }
+        System.out.println(super.ID);
+    }
 
 }
 //3. Print all data in order by length
@@ -138,14 +139,12 @@ class OrderByMatsAndGrossWeight implements Comparator<Boat> {
             return 1;
         } else if (o1.masts < o2.masts) {
             return -1;
+        } else if (o1.grossWeight > o2.grossWeight) {
+            return 1;
+        } else if (o1.grossWeight < o2.grossWeight) {
+            return -1;
         } else {
-            if (o1.grossWeight > o2.grossWeight) {
-                return 1;
-            } else if (o1.grossWeight < o2.grossWeight) {
-                return -1;
-            } else {
-                return 0;
-            }
+            return 0;
         }
     }
 
@@ -193,14 +192,16 @@ public class Marine {
             System.out.println(boat);
         });
         System.out.println("\n5. Print all data in order by masts and grossWeight\n");
+        Collections.sort(boatList, new OrderByMatsAndGrossWeight());
+
         boatList.forEach((boat) -> {
             System.out.println(boat);
         });
         System.out.println("\n");
         for (int i = 0; i < boatList.size(); i++) {
             System.out.printf("type of boat %s ", boatList.get(i).typeOfBoat());
-           Boat boat = boatList.get(i);
-           boat.uniqueIDPrint();
+            Boat boat = boatList.get(i);
+            boat.uniqueIDPrint();
 
         }
     }

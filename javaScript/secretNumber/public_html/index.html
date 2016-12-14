@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+//decalration phase
+            var numToGuess;
+            var guessNumber;
+            guessNumber = parseFloat(window.prompt("Enter the number to guess : ", ""))
+           
+            //validation
+            do {
+                numToGuess = parseInt(window.prompt("Please Enter the number to guess", "1 to 5"));
+            }
+            while (numToGuess < 1 || numToGuess > 5 || numToGuess === NaN);
+            switch (numToGuess)
+            {
+                case 1:
+                case 2:
+
+                    document.writeln("Too low");
+                    break;
+
+
+                case 4:
+                case 5:
+                    document.writeln("Too high");
+                    break;
+                default :
+                    document.writeln("You did not enter a number between 1 and 5")
+            }
+
+            //
+
+
+            document.write("you guessed the number: " + numToGuess);
+        </script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+    </body>
+</html>

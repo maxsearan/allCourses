@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+Develped by: Elmria
+Script Date: 
+Average using counter controlled repetition structure
+-->
+<html>
+    <head>
+        <title>Class Average</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type = "text/javascript">
+            //1. Declaration Phase
+            var total; //sum of grades
+            var gradeCounter, //number of grades enteres=d
+                    grade, //grade typed by a user (as a string)
+                    gradeValue, //grade value converted to number
+                    average;    //average of all grades
+            var gradeNumber =   1; //prepare for loop
+
+            //2. Initialization 
+
+            total = 0; //cleas the total
+            gradeCounter = 1; //prepare for loop
+
+            // 3. processing
+            //peompt the use to enter the grade number
+            gradeNumber = window.prompt("How many  grades you want ot ener? ==>Numbers:", "0"); //we can use the parse Int here too
+            //cause the grade number is string we have to parse
+            gradeNumber = parseInt(gradeNumber);
+            while (gradeCounter <= gradeNumber) {
+                window.alert("I'm here");
+                //Prompt for input and readgrade from user
+                grade = window.prompt("Enter a grade:", "0");
+
+                //convert the grade from the String to a number(parseInt or parseFloat)
+                gradeValue = parseFloat(grade);
+
+                //add grade value to total
+
+                total = total + gradeValue;
+                //add one to grade counter
+                gradeCounter++;
+            }//end while loop
+            //4. Termination Phase
+            average = total / gradeNumber;   //canculate the average
+
+            //Display the average of exam grades
+            document.writeln("<h2> The class average is: " + average.toFixed(3) + "</h1>"); //toFixed or toPrecision
+
+
+        </script>
+    </head>
+    <body>
+        <div></div>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+Modify the Counter control to sentinel control for the average example
+
+Develop a class averaging program that will process an arbitrary number of grades each time the program run.
+Use a sentinel (signal | dummy | flag) value to indicate the end of data entry.
+
+Initialize total to zero
+Initialize gradeCounter to zero
+Input the first grade (possibly the sentinel)
+While the user has not as yet entered the sentinel Add this grade into the running total
+Add one to the grade counter
+Input the next grade (possibly the sentinel)
+If the counter is not equal to zero
+Set the average to the total divided by the counter
+Print the average
+Else
+Print “No grades were entered”

@@ -12,6 +12,7 @@ class InvalidArgumentException extends Exception {
     InvalidArgumentException(String message) {
         super(message);
     }
+    
 }
 
 abstract class GeoObj implements Comparable<GeoObj>{
