@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Jackson Electronics World Clock</title>
+        <!--Link to the external CSS named je.css document -->
+        <!--Link to the external js named timeZones.js document -->
+        <link type="text/css" rel=" stylesheet" href="styles/je.css" />
+        <script type="text/javascript" src="scripts/ timeZones.js"></script>
+        <!--
+            JavaScript & AJAX Assignment 01
+            Jackson Electronics World Clock
+            Developed By: Elmira Amanollahi
+            Developed Date: 15/12/2016
+            Filename:worldTime.html
+            Supporting files: je.css, logo.mpg, map.jpg, timeZones.js
+        -->
+
+        <script type="text/javascript">
+
+            function worldClock() {
+                var today = new Date();
+                // document.write(today);
+
+
+                var offset = today.getTimezoneOffset() * 1000 * 60;
+                
+                var universalTime = addTime(today, offset);
+                document.write(universalTime);
+
+
+                //  alert(universalTime);
+
+                var houstonTime = addTime(universalTime, (-360) * 60 * 1000);
+                var londonTime = addTime(universalTime, 0);
+                var newYorkTime = addTime(universalTime, (400) * 60 * 1000);
+                var seattleTime = addTime(universalTime, (480) * 60 * 1000);
+                var sydneyTime = addTime(universalTime, (660) * 60 * 1000);
+                var tokyoTime = addTime(universalTime, (540) * 60 * 1000);
+
+                document.zonesForm.place1.value = showTime(houstonTime);
+                document.zonesForm.place2.value = showTime(londonTime);
+                document.zonesForm.place3.value = showTime(newYorkTime);
+                document.zonesForm.place4.value = showTime(seattleTime);
+                document.zonesForm.place5.value = showTime(sydneyTime);
+                document.zonesForm.place6.value = showTime(tokyoTime);
+            }
+
+            worldClock();
+        </script>
+    </head>
+
+    <body onload="setInterval('worldClock()', 1000);">
+        <form id="zonesForm" name="zonesForm" action="#">
+            <div id="headbar">
+                <img src="images/logo.jpg" alt="Jackson Electronics" />
+                <h2>Corporate Headquarters World Clock</h2>
+            </div>
+
+            <div id="timemap">
+                <input id="place1" name="place1" size="7" />
+                <input id="place2" name="place2" size="7" />
+                <input id="place3" name="place3" size="7" />
+                <input id="place4" name="place4" size="7" />
+                <input id="place5" name="place5" size="7" />
+                <input id="place6" name="place6" size="7" />
+
+                <img src="images/map.jpg" alt="World Map" id="map" width="655" height="371" />
+                <table>
+                    <tr>
+                        <th id="name1">Houston</th>
+                        <th id="name2">London</th>
+                        <th id="name3">New York</th>
+                        <th id="name4">Seattle</th>
+                        <th id="name5">Sydney</th>
+                        <th id="name6">Tokyo</th>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr>
+                        <td id="NY_Office">
+                            <p>
+                                <b>Jackson Electronics USA</b>
+                                <br />10010 Park Street
+                                <br />New York NY 10001
+                                <br /><b>Phone: </b>(212) 555-1209
+                                <br /><b>Fax: </b>(212) 555-4001
+                            </p>
+                        </td>
+
+                        <td id="Seattle_Office">
+                            <p>
+                                <b>Jackson Electronics Ltd.</b>
+                                <br />2349 Mitchell Street
+                                <br />Seattle, WA 65091
+                                <br /><b>Phone: </b>(381) 555-5499
+                                <br /><b>Fax: </b>(381) 555-3181
+                            </p>
+                        </td>
+
+                        <td id="Houston_Office">
+                            <p>
+                                <b>Jackson Electronics Latin America</b>
+                                <br />5150 Shasta Lane
+                                <br />Houston, TX 32821
+                                <br /><b>Phone: </b>(817) 555-8190
+                                <br /><b>Fax: </b>(817) 555-2881
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td id="London_Office">
+                            <p>
+                                <b>Jackson Electronics Europe</b>
+                                <br />18 Northland Avenue
+                                <br />London, England WC2N 5EA
+                                <br /><b>Phone: </b>(+44) 0 870 555 7081
+                                <br /><b>Fax: </b>(+44) 0 870 555 1788
+                            </p>
+                        </td>
+
+                        <td id="Sydney_Office">
+                            <p>
+                                <b>Jackson Electronics Pacifica</b>
+                                <br />171-105 Thomas Street
+                                <br />Sydney NSW 2000, Australia
+                                <br /><b>Phone: </b>(+61) 2 5555 8993
+                                <br /><b>Fax: </b>(+61) 2 5555 7171
+                            </p>
+                        </td>
+
+                        <td id="Tokyo_Office">
+                            <p>
+                                <b>Jackson Electronics Asia</b>
+                                <br />1-2-99 Sumiyoshi
+                                <br />Hakata-Ku
+                                <br />Tokyo 140-8781 Japan
+                                <br /><b>Phone: </b>(+81) 3 5551 7817
+                                <br /><b>Fax: </b>(+81) 3 5551 2398
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </body>
+</html>

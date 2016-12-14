@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Roll a Six-Sided Die 60000 times</title>
+    <script type="text/javascript">
+        var face = [0, 0, 0, 0, 0, 0];
+        for (var roll = 1; roll <= 60000; roll++) {
+            var dice = Math.floor(Math.random() * 6 + 1);
+            for (var i = 1; i <= 6; i++) {
+                if (dice === i) {
+                    face[i - 1]++;
+                }
+            }
+        } // end for loop
+        //display result in a table
+        document.writeln("<table border  = \"2\">");
+        document.writeln("<thead><tr><th>Face</th>" + "<th>Frequency </th> </tr> </thead>");
+        document.writeln("<tbody><tr><td>1</td><td>" + face[0] + "</td></tr>");
+        document.writeln("<tr><td>2</td><td>" + face[1] + "</td></tr>");
+        document.writeln("<tr><td>3</td><td>" + face[2] + "</td></tr>");
+        document.writeln("<tr><td>4</td><td>" + face[3] + "</td></tr>");
+        document.writeln("<tr><td>5</td><td>" + face[4] + "</td></tr>");
+        document.writeln("<tr><td>6</td><td>" + face[5] + "</td></tr>");
+    </script>
+</head>
+
+<body> </body>
+
+</html> s

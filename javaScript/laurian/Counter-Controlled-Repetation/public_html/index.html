@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html>
+    <head>
+        <title>Class Average</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript">
+
+            window.alert("Hi User. Welcome to average grade calculation software.");
+            var total = 0;
+            var gradeCounter = 0;
+            var averageGrade = 0;
+            var gradeNumber = 0;
+            var gradeEntered = 0;
+            var contEnteringGrades = "yes";//sentinel
+            contEnteringGrades = window.prompt("Do you want to enter grades? ", "yes or no");
+            while (contEnteringGrades !== "no") {
+
+                do {
+                    gradeEntered = window.prompt("Enter  grade from 0.0 to 4.33", "enter here");
+                    gradeNumber = parseFloat(gradeEntered);
+                    window.alert("You entered " + gradeNumber);
+                }
+                while (gradeNumber < 0.0 || gradeNumber > 4.33);
+
+                gradeCounter++;
+                window.alert("grades entered Counter: " + gradeCounter);
+                total = total + gradeNumber;
+                contEnteringGrades = window.prompt("Continue enter grades? ", "yes or no");
+
+            }
+
+            if (gradeCounter !== 0) {
+                averageGrade = parseFloat(total / gradeCounter);
+                document.writeln("you entered  a total of: " + gradeCounter + " grades " + " \n\
+        and the sytem calculted an average grade of : " + averageGrade.toFixed(2));
+            }
+            else {
+                document.writeln("No grades were entered. ");
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Laurian's first Java Script file</h1>
+
+
+
+        <p> </p>
+    </body>
+</html>

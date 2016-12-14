@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Interest Rate</title>
+        <style type="text/css" >
+
+            table {
+                width: 300px;
+                border-collapse:collapse;
+                background-color:aqua;
+            }
+            table,td,th {
+                border:1px solid black;
+                padding:4px;
+            }
+            th {
+                text-align: left;
+                color:aliceblue;
+                background-color:darkblue;
+
+
+            }
+
+
+            tr.oddrow {
+                background-color: #ff0000;
+            }
+
+        </style>
+        <script>
+            // declare variables 
+            var principal; //original amount invested (i,e, the principal)
+            var RATE; // the annual rate
+            var amount; // the amount on deposit at the end of the each year
+            // Initialization
+            principal = 1000.00;
+            RATE = 0.05;
+            document.writeln("<table"); //begin the table
+            document.writeln("<caption>Calculating Compound Interest</caption>");
+            document.writeln("<thead><tr>Year<th>"); //  year  column heading
+            document.writeln("<th> Amount on Deposit </th>");
+            document.writeln("</tr></thead><tbody>");
+
+            //processing
+            for (var year = 1; year <= 10; year++) {
+                amount = principal * Math.pow(1.0 + RATE, year);
+                if (year % 2 !== 0) {
+                    document.writeln("<tr class = 'oddrow'><td>" + year + 
+                            "</td><td>" + amount.toFixed(2) + "</td></tr>");
+                }
+                else {
+                    document.writeln("<tr><td>" + year + 
+                            "</td><td>" + amount.toFixed(2) + 
+                            "</td></tr>");
+
+
+                }
+            }//end for loop
+            //close tbody and table tags
+            document.writeln("</tbody></table>");
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>

@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Fahrenheit to Centigrade</title>
+    <script type="text/javascript">
+        var degFehren;
+        var centigrade;
+        degFehren = window.prompt("Please enter the tempreture in Fahrenheit", "32");
+        degFehren1 = parseFloat(degFehren);
+        centigrade = 5 / 9 * (degFehren - 32);
+        centigrade1 = document.writeln("<h2>The tempreture " + degFehren + "\xB0 that you entered in Centigrade is: </h2></br>" + centigrade);
+        if (centigrade < 0) {
+            document.writeln("<h2>that's below the freezing point of water.</h2>");
+        }
+        if (centigrade === 100) {
+            document.writeln("<h2>that's the boiling point  of water.</h2>");
+        }
+
+        
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

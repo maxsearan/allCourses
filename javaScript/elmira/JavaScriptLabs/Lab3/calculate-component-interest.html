@@ -1,0 +1,40 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Calculate Component Interest</title>
+    <script type="text/javascript">
+        //1.Declaration
+        var invest;
+        var annualRate;
+        var yearNum;                                 
+       
+        function deposit(invest, annualRate, yearNum) {
+           
+            //a = p (1 + r)^n
+            return invest(Math.pow((1 + annualRate/100), yearNum));
+        }
+        // window.alert("hi");
+        document.writeln("hey");
+        var amountInvested = deposit(1000,5,10);
+        for (var i = 1; i <= 10; i++) {
+
+            document.writeln("<h2>component interest is:</h2>" + amountInvested);
+            
+      }
+     
+       
+        
+
+
+
+    </script>
+
+
+        </head>
+        <body>
+
+        </body>
+</html>
