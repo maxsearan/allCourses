@@ -19,50 +19,42 @@
         <!-- link to an external script nyclock.js -->
         <script type="text/javascript" src="script/timeZones.js"></script>
         <script type="text/javascript">
-            var temp = 77771564221;
+            function worldClock() {
+                var today = new Date();
+                var offset = today.getTimezoneOffset() * 1000 * 60;
+                //london time
+                var universalTime = addTime(today, offset);
+                //document.write(universalTime);
+                var offset1 = (-360) * 60 * 1000;//Houston offset
+                var time1 = addTime(universalTime, offset1);
 
-            var present = new Date;
+                //London offset 0
+                var time2 = universalTime;
+                //New York offset -300
+                var offset3 = (-300) * 60 * 1000;
+                var time3 = addTime(universalTime, offset3);
 
-            var result = addTime(present, temp);
-             
-            //document.writeln(showTime(result));
+                //Seattle -60*8
+                var offset4 = (-60 * 8) * 60 * 1000;
+                var time4 = addTime(universalTime, offset4);
+                //Sydney 660
+                var offset5 = (660) * 60 * 1000;
+                var time5 = addTime(universalTime, offset5);
+                //Tokyo 9*60
+                var offset6 = (9 * 60) * 60 * 1000;
+                var time6 = addTime(universalTime, offset6);
 
-           function worldClock(){
-               var today = new Date();
-               var offset = today.getTimezoneOffset()*1000*60;
-               //london time
-               var universalTime =addTime(today,offset);
-               //document.write(universalTime);
-               var offset1= (-360)*60*1000;//Houston offset
-               var time1 = addTime(universalTime,offset1);
-               
-               //London offset 0
-               var time2=universalTime;
-               //New York offset -300
-               var offset3= (-300)*60*1000;
-               var time3 = addTime(universalTime,offset3);
-               
-               //Seattle -60*8
-               var offset4= (-60*8)*60*1000;
-               var time4 = addTime(universalTime,offset4);
-               //Sydney 660
-               var offset5= (660)*60*1000;
-               var time5 = addTime(universalTime,offset5);
-               //Tokyo 9*60
-               var offset6= (9*60)*60*1000;
-               var time6 = addTime(universalTime,offset6);
-               
-               
-              
-               document.zonesForm.place1.value = showTime(time1);
-               document.zonesForm.place2.value = showTime(time2);
-               document.zonesForm.place3.value = showTime(time3);
-               document.zonesForm.place4.value = showTime(time4);
-               document.zonesForm.place5.value = showTime(time5);
-               document.zonesForm.place6.value = showTime(time6);
-           }
 
-           worldClock();
+
+                document.zonesForm.place1.value = showTime(time1);
+                document.zonesForm.place2.value = showTime(time2);
+                document.zonesForm.place3.value = showTime(time3);
+                document.zonesForm.place4.value = showTime(time4);
+                document.zonesForm.place5.value = showTime(time5);
+                document.zonesForm.place6.value = showTime(time6);
+            }
+
+            worldClock();
 
 
 
