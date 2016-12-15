@@ -1,0 +1,139 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+
+/*
+   JavaScript & AJAX Assignment 01
+   Developed By: Laurian Staicu
+   Developed Date:  13 dec 2016
+   Filename: je.css
+   This file contains styles used in the worldTime.html file.
+*/
+
+body,
+html {
+    margin: 10px;
+    width: 700px;
+    height: 900px;
+}
+
+html {
+    background-color: white;
+}
+
+body {
+    border: 1px solid black;
+    background-color: lightyellow;
+}
+
+table,
+td,
+th {
+    border: 1px solid black;
+    padding: 4px;
+    color: black;
+    text-align: center;
+}
+
+#zonesForm {
+    padding-top: 20px;
+    position: absolute;
+}
+
+h2 {
+    color: blue;
+    margin: 0;
+    text-align: center;
+}
+
+#headbar {
+    width: 800px;
+}
+
+#timemap {
+    width: 655px;
+    position: absolute;
+    margin-bottom: 10%;
+}
+
+#cities {
+    width: 655px;
+    border-color: transparent;
+}
+
+#offices {
+    border-color: transparent;
+}
+
+#name1 {
+    background-color: lightgray;
+}
+
+#name2 {
+    background-color: floralwhite;
+}
+
+#name3 {
+    background-color: antiquewhite;
+}
+
+#name4 {
+    background-color: aqua;
+}
+
+#name5 {
+    background-color: pink;
+}
+
+#name6 {
+    background-color: darkkhaki;
+}
+
+#place1 {
+    position: absolute;
+    top: 24%;
+    left: 20%;
+    background-color: lightgray;
+    border-color: black;
+}
+
+#place2 {
+    position: absolute;
+    top: 16%;
+    left: 45%;
+    background-color: floralwhite;
+    border-color: black;
+}
+
+#place3 {
+    position: absolute;
+    top: 19%;
+    left: 25%;
+    background-color: antiquewhite;
+    border-color: black;
+}
+
+#place4 {
+    position: absolute;
+    top: 18%;
+    left: 10%;
+    background-color: aqua;
+    border-color: black;
+}
+
+#place5 {
+    position: absolute;
+    top: 40%;
+    left: 87%;
+    background-color: pink;
+    border-color: black;
+}
+
+#place6 {
+    position: absolute;
+    top: 20%;
+    left: 85%;
+    background-color: darkkhaki;
+    border-color: black;
+}
