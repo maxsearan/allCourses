@@ -1,6 +1,0 @@
-Ocean Breeze III;2373.5;11.3;2;hovercraft
-Magic Beyond;4532.1;27.2;3;submarine
-adventurer 2;789.5;7.3;1;boat
-Cape Verde;567.8;8.4;2;exploration vehicle
-france;1456.67;50.56;7;torpido
-Quebec;778.45;40.6;4;boat
